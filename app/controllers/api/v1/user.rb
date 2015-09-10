@@ -1,6 +1,8 @@
+require 'doorkeeper/grape/helpers'
+
 module API
   module V1
-    class API < Grape::API
+    class User < Grape::API
       include Defaults
 
       error_formatter :json, lambda { |message, backtrace, option, env|
@@ -11,8 +13,10 @@ module API
         }
       }
 
-      helpers do
+      helpers Doorkeeper::Grape::Helpers
 
+      before do
+        doorkeeper_authorize!
       end
 
       resource :user do
@@ -32,6 +36,13 @@ module API
           else
             raise StandardError.new user.errors
           end
+        end
+
+        desc "User with token."
+        get do
+          {
+            status: 'success'
+          }
         end
 
       end
