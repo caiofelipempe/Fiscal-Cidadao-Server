@@ -1,10 +1,7 @@
 module API
   module V1
     class API < Grape::API
-      version 'v1', using: :header, vendor: 'cidadao_alerta'
-      format :json
-      rescue_from :all
-      prefix :api
+      include Defaults
 
       error_formatter :json, lambda { |message, backtrace, option, env|
         {
