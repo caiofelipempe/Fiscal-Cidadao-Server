@@ -2,7 +2,7 @@ require 'doorkeeper/grape/helpers'
 
 module API
   module V1
-    class User < Grape::API
+    class UserApi < Grape::API
       include Defaults
 
       error_formatter :json, lambda { |message, backtrace, option, env|
@@ -14,6 +14,14 @@ module API
       }
 
       helpers Doorkeeper::Grape::Helpers
+
+      helpers do
+        def current_resource_owner
+          access_token = Doorkeeper::AccessToken.find_by_token(params[:access_token])
+          user = User.find(access_token.resource_owner_id)
+          user
+        end
+      end
 
       before do
         doorkeeper_authorize!
@@ -40,9 +48,7 @@ module API
 
         desc "User with token."
         get do
-          {
-            status: 'success'
-          }
+          current_resource_owner
         end
 
       end
