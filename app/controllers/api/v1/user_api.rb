@@ -16,15 +16,11 @@ module API
       helpers Doorkeeper::Grape::Helpers
 
       helpers do
-        def current_resource_owner
+        def current_user
           access_token = Doorkeeper::AccessToken.find_by_token(params[:access_token])
           user = User.find(access_token.resource_owner_id)
           user
         end
-      end
-
-      before do
-        doorkeeper_authorize!
       end
 
       resource :user do
@@ -46,9 +42,14 @@ module API
           end
         end
 
+        before do
+          doorkeeper_authorize!
+          @current_user = current_user
+        end
+
         desc "User with token."
         get do
-          current_resource_owner
+          @current_user
         end
 
       end
