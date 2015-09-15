@@ -17,8 +17,7 @@ module API
 
       helpers do
         def current_user
-          access_token = Doorkeeper::AccessToken.find_by_token(params[:access_token])
-          user = User.find(access_token.resource_owner_id)
+          user = User.find(doorkeeper_token.resource_owner_id)
           user
         end
       end
@@ -32,7 +31,7 @@ module API
           requires :password, type: String, desc: "Password"
         end
         post :new do
-          user = user.new(login: params[:login], email: params[:email], password: params[:password])
+          user = User.new(login: params[:login], email: params[:email], password: params[:password])
           if user.save
             {
               status: 'success'
