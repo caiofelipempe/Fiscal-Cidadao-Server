@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'doorkeeper'
 gem 'devise'
 gem 'grape'
+gem 'paperclip'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

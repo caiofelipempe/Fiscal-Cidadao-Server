@@ -37,7 +37,7 @@ module API
               status: 'success'
             }
           else
-            raise StandardError.new user.errors
+            raise StandardError.new user.errors.messages
           end
         end
 
@@ -48,7 +48,32 @@ module API
 
         desc "User with token."
         get do
-          @current_user
+          {
+            id: @current_user.id,
+            login: @current_user.login,
+            email: @current_user.email,
+            image_url: @current_user.image.url
+          }
+        end
+
+        desc "Update image"
+        # params do
+        #   requires :image, :type => Rack::Multipart::UploadedFile, :desc => "Image file."
+        # end
+        post :image do
+          encoded_picture = params[:image]
+          content_type = "image/jpeg"
+          filename =  @current_user.login + ".jpg"
+          image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_picture}")
+          image.original_filename = filename
+          @current_user.image = image
+          if @current_user.save
+            {
+              status: 'success'
+            }
+          else
+            raise StandardError.new @current_user.errors.messages
+          end
         end
 
       end
