@@ -1,4 +1,6 @@
 Doorkeeper.configure do
+  access_token_expires_in 30.days
+
   resource_owner_from_credentials do |routes|
     if params[:username].include?("@")
           user = User.find_by_email(params[:username].downcase)
