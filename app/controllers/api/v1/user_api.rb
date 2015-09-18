@@ -5,14 +5,6 @@ module API
     class UserApi < Grape::API
       include Defaults
 
-      error_formatter :json, lambda { |message, backtrace, option, env|
-        {
-          status: 'failed',
-          message: message,
-          status_code: env['api.endpoint'].status
-        }
-      }
-
       helpers Doorkeeper::Grape::Helpers
 
       helpers do
