@@ -68,6 +68,53 @@ module API
           end
         end
 
+        desc "Report a issue."
+        params do
+          requires :latitude, type: Float, desc: "Latitude"
+          requires :longitude, type: Float, desc: "Longitude"
+          optional :address, type: String, desc: "Address"
+          requires :issue_id, type: Integer, desc: "id of issue"
+          requires :description, type: String, desc: "Description"
+        end
+        post :issue do
+          issue = Issue.find(params[:issue_id])
+          if !issue
+            raise StandardError.new "Issue id is not registered."
+          end
+
+          issue_report = IssueReport.new(
+            user: @current_user,
+            issue_id: issue.id,
+            latitude: params[:latitude],
+            longitude: params[:longitude],
+            description: params[:description]
+          )
+
+          address = params[:address]
+          if address
+            issue_report.address = address
+          else
+
+          end
+
+          encoded_picture = params[:image]
+          if encoded_picture
+            content_type = "image/jpeg"
+            filename =  issue_report.id.to_s + "issue_report_image.jpg"
+            image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_picture}")
+            image.original_filename = filename
+            issue_report.image = image
+          end
+
+          if issue_report.save
+            {
+              status: 'success'
+            }
+          else
+            raise StandardError.new issue_report.errors.messages
+          end
+        end
+
       end
 
     end
