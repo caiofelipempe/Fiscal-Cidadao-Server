@@ -115,6 +115,31 @@ module API
           end
         end
 
+        desc "Get report resolutions."
+        get :report_resolutions do
+          ResolutionReport.all
+        end
+
+        desc "Get report resolutions."
+        get :report_problems do
+          array = []
+          if @current_user.admin_id
+            IssueReport.all.each do |issue_report|
+            element = {
+              id: issue_report.id,
+              issue: Issue.find(issue_report.issue_id),
+              description: issue_report.description,
+              latitude: issue_report.latitude,
+              longitude: issue_report.longitude,
+              image_url: issue_report.image.url
+            }
+            array.push(element)
+            end
+          else
+            raise StandardError.new 'That user hasn\'t admin permission.'
+          end
+        end
+
       end
 
     end

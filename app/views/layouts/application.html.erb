@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>CidadaoAlerta</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -11,7 +12,23 @@
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
-<%= yield %>
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <%= link_to "sample app", '#', id: "logo" %>
+      <nav>
+        <ul class="nav navbar-nav navbar-right">
+          <% if user_signed_in? %>
+          <li><%= link_to "Profile", root_path %></li>
+          <li><%= link_to "Reported issues", issue_reports_path %></li>
+          <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+          <% end %>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <%= yield %>
 
 </body>
+
 </html>

@@ -1,0 +1,11 @@
+<h1>User Profile</h1>
+
+<tr>
+  <% if current_user.image.url != '/images/original/missing.png' %>
+    <%= link_to image_tag(current_user.image.url(:med)), current_user.image.url %>
+  <% end %>
+  <p> <td><%= current_user.login %></td> </p>
+  <p> <td><%= current_user.email %></td> </p>
+</tr>
+
+</table>
