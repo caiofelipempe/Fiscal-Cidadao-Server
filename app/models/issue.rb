@@ -1,2 +1,3 @@
 class Issue < ActiveRecord::Base
+  validates :name, uniqueness: true
 end

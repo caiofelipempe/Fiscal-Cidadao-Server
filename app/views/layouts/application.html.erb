@@ -21,6 +21,9 @@
           <li><%= link_to "Profile", root_path %></li>
           <li><%= link_to "Reported issues", issue_reports_path %></li>
           <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
+            <% if current_user.admin_id != nil %>
+              <li><%= link_to "Issues", issues_path %></li>
+            <% end %>
           <% end %>
         </ul>
       </nav>

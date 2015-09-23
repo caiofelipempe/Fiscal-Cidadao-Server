@@ -16,8 +16,8 @@
           <td><%= link_to image_tag(issue_report.image.url(:med)), issue_report.image.url %></td>
         <% end %>
         <td>
-          <p><%= Issue.find(issue_report.issue_id).name %></p>
-          <p><%= issue_report.address %></p>
+          <b><p><%= Issue.find(issue_report.issue_id).name %></p>
+          <p><%= issue_report.address %></p></b>
           <p><%= issue_report.description %></p>
         </td>
         <td><%= link_to 'Show', issue_report %></td>

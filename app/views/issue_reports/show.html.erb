@@ -1,4 +1,41 @@
 <p id="notice"><%= notice %></p>
 
+<% if @issue_report.image.url != '/images/original/missing.png' %>
+  <td><%= link_to image_tag(@issue_report.image.url(:med)), @issue_report.image.url %></td>
+<% end %>
+<td>Reported from: <%= @issue_report.user.login %></td>
+<td>
+  <b>
+    <p><%= Issue.find(@issue_report.issue_id).name %></p>
+    <p><%= @issue_report.address %></p>
+  </b>
+  <p><%= @issue_report.description %></p>
+</td>
+
 <%= link_to 'Edit', edit_issue_report_path(@issue_report) %> |
 <%= link_to 'Back', issue_reports_path %>
+
+<h2>Resolutions</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @issue_report.resolution_reports.each do |resolution_report| %>
+    <tr>
+      <% if resolution_report.image.url != '/images/original/missing.png' %>
+      <td><%= link_to image_tag(resolution_report.image.url(:med)), resolution_report.image.url %></td>
+      <% end %>
+      <td>resolution_report.description</td>
+      <% if current_user.admin_id != nil %>
+      <td><%= link_to 'Edit', edit_issue_report_path(issue_report) %></td>
+      <td><%= link_to 'Destroy', issue_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
