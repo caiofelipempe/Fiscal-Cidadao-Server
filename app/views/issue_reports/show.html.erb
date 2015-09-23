@@ -3,7 +3,7 @@
 <% if @issue_report.image.url != '/images/original/missing.png' %>
   <td><%= link_to image_tag(@issue_report.image.url(:med)), @issue_report.image.url %></td>
 <% end %>
-<td>Reported from: <%= @issue_report.user.login %></td>
+<td>Reported by: <%= @issue_report.user.login %></td>
 <td>
   <b>
     <p><%= Issue.find(@issue_report.issue_id).name %></p>
