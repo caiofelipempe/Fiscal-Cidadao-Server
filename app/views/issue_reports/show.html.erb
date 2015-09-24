@@ -6,16 +6,25 @@
 <td>Reported by: <%= @issue_report.user.login %></td>
 <td>
   <b>
-    <p><%= Issue.find(@issue_report.issue_id).name %></p>
-    <p><%= @issue_report.address %></p>
+    <p>
+      <%= Issue.find(@issue_report.issue_id).name %>
+    </p>
+    <p>
+      <%= @issue_report.address %>
+    </p>
   </b>
-  <p><%= @issue_report.description %></p>
+  <p>
+    <%= @issue_report.description %>
+  </p>
 </td>
 
 <%= link_to 'Edit', edit_issue_report_path(@issue_report) %> |
 <%= link_to 'Back', issue_reports_path %>
 
 <h2>Resolutions</h2>
+<% if current_user.admin_id != nil %>
+  <%= link_to 'New Resolution', issue_report_resolution_report_new_path(@issue_report) %>
+<% end %>
 
 <table>
   <thead>
@@ -28,13 +37,16 @@
     <% @issue_report.resolution_reports.each do |resolution_report| %>
     <tr>
       <% if resolution_report.image.url != '/images/original/missing.png' %>
-      <td><%= link_to image_tag(resolution_report.image.url(:med)), resolution_report.image.url %></td>
+      <td>
+        <%= link_to image_tag(resolution_report.image.url(:med)), resolution_report.image.url %>
+      </td>
       <% end %>
-      <td>resolution_report.description</td>
-      <% if current_user.admin_id != nil %>
-      <td><%= link_to 'Edit', edit_issue_report_path(issue_report) %></td>
-      <td><%= link_to 'Destroy', issue_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      <% end %>
+      <p>
+        <%= resolution_report.user.login %>
+      </p>
+      <p>
+        <%= resolution_report.description %>
+      </p>
     </tr>
     <% end %>
   </tbody>
