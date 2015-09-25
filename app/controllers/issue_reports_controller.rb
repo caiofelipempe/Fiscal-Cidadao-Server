@@ -14,8 +14,6 @@ class IssueReportsController < ApplicationController
           @issue_reports << issue_report
         end
       end
-
-      @issue_reports = @issue_reports.uniq
     end
   end
 

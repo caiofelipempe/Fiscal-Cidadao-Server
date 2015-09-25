@@ -25,6 +25,7 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
+    authenticate_admin
     @issue = Issue.new(issue_params)
 
     respond_to do |format|
