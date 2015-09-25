@@ -9,6 +9,13 @@ class IssueReportsController < ApplicationController
       @issue_reports = IssueReport.all
     else
       @issue_reports = IssueReport.where(user: current_user)
+      IssueReport.all.each do |issue_report|
+        if issue_report.user == current_user || issue_report.resolution_reports.first != nil
+          @issue_reports << issue_report
+        end
+      end
+
+      @issue_reports = @issue_reports.uniq
     end
   end
 
