@@ -8,9 +8,9 @@ class IssueReportsController < ApplicationController
     if current_user.admin_id
       @issue_reports = IssueReport.all
     else
-      @issue_reports = IssueReport.where(user: current_user)
+      @issue_reports = []
       IssueReport.all.each do |issue_report|
-        if issue_report.user == current_user || issue_report.resolution_reports.first != nil
+        if issue_report.user == current_user || issue_report.resolution_reports.exists?
           @issue_reports << issue_report
         end
       end

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     authenticate_user!
 
     if current_user.admin_id == nil
-      raise StandardError.new 'Admin permission needed.'
+      raise StandardError.new 'Access denied.'
     end
   end
 

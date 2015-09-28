@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  before_create :check_admin
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,4 +13,11 @@ class User < ActiveRecord::Base
   validates_attachment :image, :content_type => { :content_type => 'image/jpeg' }, :size => { :in => 0..1000.kilobytes }
 
   validates :login, uniqueness: true, format: { without: /@/ }
+
+  def check_admin
+        if !(Admin.exists?) && !(User.exists?)
+          admin = Admin.new
+          self.admin = admin
+        end
+    end
 end
