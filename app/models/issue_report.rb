@@ -1,6 +1,6 @@
 class IssueReport < ActiveRecord::Base
   belongs_to :user
-
+  belongs_to :issue
   has_many :resolution_reports, :dependent => :delete_all
 
   has_attached_file :image, styles: { small: "64x64#", med: "100x100#", large: "200x200#" }, :dependent => :delete

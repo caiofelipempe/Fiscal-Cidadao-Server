@@ -7,7 +7,11 @@
 <td>
   <b>
     <p>
-      <%= Issue.find(@issue_report.issue_id).name %>
+      <% if @issue_report.issue_id != nil %>
+        <%= Issue.find(@issue_report.issue_id).name %>
+      <% else %>
+        Other
+      <% end %>
     </p>
     <p>
       <%= @issue_report.address %>

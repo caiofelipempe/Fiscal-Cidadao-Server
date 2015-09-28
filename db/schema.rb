@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20150923182530) do
 
   create_table "issue_reports", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "issue_id"
     t.string   "latitude"
     t.float    "longitude"
     t.string   "address"
@@ -31,11 +32,11 @@ ActiveRecord::Schema.define(version: 20150923182530) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
-    t.integer  "issue_id"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
+  add_index "issue_reports", ["issue_id"], name: "index_issue_reports_on_issue_id", using: :btree
   add_index "issue_reports", ["user_id"], name: "index_issue_reports_on_user_id", using: :btree
 
   create_table "issues", force: :cascade do |t|
@@ -124,6 +125,7 @@ ActiveRecord::Schema.define(version: 20150923182530) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "issue_reports", "issues"
   add_foreign_key "issue_reports", "users"
   add_foreign_key "resolution_reports", "issue_reports"
   add_foreign_key "resolution_reports", "users"

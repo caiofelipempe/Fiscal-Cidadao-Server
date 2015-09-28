@@ -7,6 +7,8 @@ class ResolutionReportController < ApplicationController
   end
 
   def create
+    authenticate_admin
+
     @resolution_report = ResolutionReport.new(issue_params)
     @resolution_report.issue_report = @issue_report
     @resolution_report.user = current_user

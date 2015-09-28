@@ -73,18 +73,18 @@ module API
           requires :latitude, type: Float, desc: "Latitude"
           requires :longitude, type: Float, desc: "Longitude"
           optional :address, type: String, desc: "Address"
-          requires :issue_id, type: Integer, desc: "id of issue"
+          optional :issue_id, type: Integer, desc: "id of issue"
           requires :description, type: String, desc: "Description"
         end
         post :issue do
-          issue = Issue.find(params[:issue_id])
-          if !issue
-            raise StandardError.new "Issue id is not registered."
-          end
+          # issue = Issue.find(params[:issue_id])
+          # if !issue
+          #   raise StandardError.new "Issue id is not registered."
+          # end
 
           issue_report = IssueReport.new(
             user: @current_user,
-            issue_id: issue.id,
+            issue_id: params[:issue_id],
             latitude: params[:latitude],
             longitude: params[:longitude],
             description: params[:description]
