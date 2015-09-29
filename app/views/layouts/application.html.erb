@@ -9,7 +9,7 @@
 </head>
 <body>
 
-  <p class="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
   <header class="navbar navbar-fixed-top navbar-inverse">
@@ -20,7 +20,7 @@
           <% if user_signed_in? %>
             <li><%= link_to "Profile", root_path %></li>
             <li><%= link_to "Reported issues", issue_reports_path %></li>
-            <% if current_user.admin_id != nil %>
+            <% if current_user.admin != nil %>
               <li><%= link_to "Issues", issues_path %></li>
             <% end %>
             <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>

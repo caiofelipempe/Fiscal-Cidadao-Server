@@ -123,7 +123,7 @@ module API
         desc "Get report resolutions."
         get :report_problems do
           array = []
-          if @current_user.admin_id
+          if @current_user.admin != nil
             IssueReport.all.each do |issue_report|
             element = {
               id: issue_report.id,

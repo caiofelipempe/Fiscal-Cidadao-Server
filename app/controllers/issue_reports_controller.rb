@@ -5,7 +5,7 @@ class IssueReportsController < ApplicationController
   # GET /issue_reports
   # GET /issue_reports.json
   def index
-    if current_user.admin_id
+    if current_user.admin != nil
       @issue_reports = IssueReport.all
     else
       @issue_reports = []

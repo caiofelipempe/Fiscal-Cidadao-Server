@@ -1,6 +1,7 @@
 class ResolutionReportController < ApplicationController
   before_action :authenticate_user!
   before_action :set_issue_report, only: [:create, :destroy]
+  before_action :set_resolution_report, only: :destroy
 
   def new
     @resolution_report = ResolutionReport.new
@@ -25,10 +26,10 @@ class ResolutionReportController < ApplicationController
   end
 
   def destroy
-    if current_user == @issue_report.user || current_user.admin_id != nil
+    if current_user == @issue_report.user || current_user.admin != nil
       @resolution_report.destroy
       respond_to do |format|
-        format.html { redirect_to issue_reports_url, notice: 'Issue report was successfully destroyed.' }
+        format.html { redirect_to issue_report_path(@issue_report), notice: 'Issue report was successfully destroyed.' }
         format.json { head :no_content }
       end
     else

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   def authenticate_admin
     authenticate_user!
 
-    if current_user.admin_id == nil
+    if current_user.admin == nil
       raise StandardError.new 'Access denied.'
     end
   end

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :issue_reports
-  belongs_to :admin
+  has_one :admin, :dependent => :delete
 
   has_attached_file :image, styles: { small: "64x64#", med: "100x100#", large: "200x200#" }, :dependent => :delete
   validates_attachment :image, :content_type => { :content_type => 'image/jpeg' }, :size => { :in => 0..1000.kilobytes }
@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   def check_admin
         if !(Admin.exists?) && !(User.exists?)
           admin = Admin.new
-          self.admin = admin
+          admin.user = self
         end
     end
 end
