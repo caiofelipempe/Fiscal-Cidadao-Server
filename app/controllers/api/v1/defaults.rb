@@ -14,7 +14,7 @@ module API
             status: 'failed',
             message: message,
             status_code: env['api.endpoint'].status
-          }
+          }.to_json
         }
       end
 
