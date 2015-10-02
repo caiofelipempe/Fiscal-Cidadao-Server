@@ -9,9 +9,6 @@ class User < ActiveRecord::Base
   has_many :issue_reports
   has_one :admin, :dependent => :delete
 
-  has_attached_file :image, styles: { small: "64x64#", med: "100x100#", large: "200x200#" }, :dependent => :delete
-  validates_attachment :image, :content_type => { :content_type => 'image/jpeg' }, :size => { :in => 0..1000.kilobytes }
-
   validates :login, uniqueness: true, format: { without: /@/ }
 
   def check_admin

@@ -10,7 +10,7 @@ class IssueReportsController < ApplicationController
     else
       @issue_reports = []
       IssueReport.all.each do |issue_report|
-        if issue_report.user == current_user || issue_report.resolution_reports.exists?
+        if issue_report.user == current_user || issue_report.resolution_report.exists?
           @issue_reports << issue_report
         end
       end

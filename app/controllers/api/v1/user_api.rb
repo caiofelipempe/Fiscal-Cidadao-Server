@@ -43,29 +43,8 @@ module API
           {
             id: @current_user.id,
             login: @current_user.login,
-            email: @current_user.email,
-            image_url: @current_user.image.url
+            email: @current_user.email
           }
-        end
-
-        desc "Update image"
-        # params do
-        #   requires :image, :type => Rack::Multipart::UploadedFile, :desc => "Image file."
-        # end
-        post :image do
-          encoded_picture = params[:image]
-          content_type = "image/jpeg"
-          filename =  @current_user.login + ".jpg"
-          image = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_picture}")
-          image.original_filename = filename
-          @current_user.image = image
-          if @current_user.save
-            {
-              status: 'success'
-            }
-          else
-            raise StandardError.new @current_user.errors.messages
-          end
         end
 
         desc "Report a issue."
@@ -115,29 +94,25 @@ module API
           end
         end
 
-        desc "Get report resolutions."
-        get :report_resolutions do
-          ResolutionReport.all
-        end
-
-        desc "Get report resolutions."
+        desc "Get report problems."
         get :report_problems do
           array = []
-          if @current_user.admin != nil
-            IssueReport.all.each do |issue_report|
-            element = {
-              id: issue_report.id,
-              issue: Issue.find(issue_report.issue_id),
-              description: issue_report.description,
-              latitude: issue_report.latitude,
-              longitude: issue_report.longitude,
-              image_url: issue_report.image.url
-            }
-            array.push(element)
+          IssueReport.all.each do |issue_report|
+            if resolution_report = issue_report.resolution_report
+              array << {
+                id: issue_report.id,
+                issue: Issue.find(issue_report.issue_id),
+                description: issue_report.description,
+                latitude: issue_report.latitude,
+                longitude: issue_report.longitude,
+                image_url: issue_report.image.url,
+                resolution_report: {
+                  description: resolution_report.description
+                }
+              }
             end
-          else
-            raise StandardError.new 'That user hasn\'t admin permission.'
           end
+          array
         end
 
       end

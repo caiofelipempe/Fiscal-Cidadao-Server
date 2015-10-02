@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "user_profile#show"
+  root to: "issue_reports#index"
 
   resources :issues
   resources :issue_reports, :except => [:new, :create] do
