@@ -12,6 +12,41 @@ module API
           user = User.find(doorkeeper_token.resource_owner_id)
           user
         end
+
+        def creation_time(created_at)
+          creation_time = (Time.now - created_at)
+          if creation_time < 60
+            creation_time = "Agora"
+          else
+            creation_time = creation_time/60
+            if creation_time < 60
+              creation_time = creation_time.round
+              if creation_time > 1
+                creation_time = creation_time.to_s + " Minutos"
+              else
+                creation_time = creation_time.to_s + " Minuto"
+              end
+            else
+              creation_time = creation_time/60
+              if creation_time < 60
+                creation_time = creation_time.round
+                if creation_time > 1
+                  creation_time = creation_time.to_s + " Horas"
+                else
+                  creation_time = creation_time.to_s + " Hora"
+                end
+              else
+                creation_time = creation_time/24
+                creation_time = creation_time.round
+                if creation_time > 1
+                  creation_time = creation_time.to_s + " Dias"
+                else
+                  creation_time = creation_time.to_s + " Dia"
+                end
+              end
+            end
+          end
+        end
       end
 
       resource :user do
@@ -101,14 +136,17 @@ module API
             if resolution_report = issue_report.resolution_report
               array << {
                 id: issue_report.id,
-                user_id: issue_report.user_id,
+                user: User.find(issue_report.user_id),
                 issue: issue_report.issue_id,
                 description: issue_report.description,
                 latitude: issue_report.latitude,
                 longitude: issue_report.longitude,
                 image_url: issue_report.image.url,
+                creation_time: creation_time(issue_report.created_at),
                 resolution_report: {
-                  description: resolution_report.description
+                  id: resolution_report.id,
+                  description: resolution_report.description,
+                  creation_time: creation_time(resolution_report.created_at)
                 }
               }
             end
