@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 20150921142253) do
   create_table "issue_reports", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "issue_id"
-    t.string   "latitude"
+    t.float    "latitude"
     t.float    "longitude"
     t.string   "address"
     t.string   "description"

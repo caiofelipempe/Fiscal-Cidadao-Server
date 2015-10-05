@@ -95,13 +95,14 @@ module API
         end
 
         desc "Get report problems."
-        get :report_problems do
+        get :issue_reports do
           array = []
           IssueReport.all.each do |issue_report|
             if resolution_report = issue_report.resolution_report
               array << {
                 id: issue_report.id,
-                issue: Issue.find(issue_report.issue_id),
+                user_id: issue_report.user_id,
+                issue: issue_report.issue_id,
                 description: issue_report.description,
                 latitude: issue_report.latitude,
                 longitude: issue_report.longitude,

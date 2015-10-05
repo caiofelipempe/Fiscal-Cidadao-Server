@@ -3,7 +3,7 @@ class CreateIssueReports < ActiveRecord::Migration
     create_table :issue_reports do |t|
       t.belongs_to :user, index: true, foreign_key: true
       t.belongs_to :issue, index: true, foreign_key: true
-      t.string :latitude
+      t.float :latitude
       t.float :longitude
       t.string :address
       t.string :description
