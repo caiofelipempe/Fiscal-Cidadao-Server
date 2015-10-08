@@ -141,6 +141,7 @@ module API
                 description: issue_report.description,
                 latitude: issue_report.latitude,
                 longitude: issue_report.longitude,
+                address: issue_report.address,
                 image_url: issue_report.image.url(:thumb),
                 creation_time: creation_time(issue_report.created_at),
                 resolution_report: {
