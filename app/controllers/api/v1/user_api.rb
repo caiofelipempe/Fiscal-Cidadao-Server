@@ -137,11 +137,11 @@ module API
               array << {
                 id: issue_report.id,
                 user: User.find(issue_report.user_id),
-                issue: issue_report.issue_id,
+                issue: issue_report.issue,
                 description: issue_report.description,
                 latitude: issue_report.latitude,
                 longitude: issue_report.longitude,
-                image_url: issue_report.image.url,
+                image_url: issue_report.image.url(:thumb),
                 creation_time: creation_time(issue_report.created_at),
                 resolution_report: {
                   id: resolution_report.id,
