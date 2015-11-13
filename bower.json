@@ -20,6 +20,8 @@
   "dependencies": {
     "material-design-lite": "~1.0.6",
     "material-design-icons": "~2.0.0",
-    "angular-material": "~0.11.4"
+    "angular-material": "~0.11.4",
+    "angular-resource": "~1.4.7",
+    "angular-ui-router": "~0.2.15"
   }
 }

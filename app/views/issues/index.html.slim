@@ -1,0 +1,24 @@
+.title-subheader style="position: relative;"
+  h2 class="md-display-1"
+    span class="ca ca-category"
+      ' Categorias de problemas
+  = link_to new_issue_path, :class => "md-button md-fab md-fab-float" do
+    span class="ca ca-plus"
+
+
+md-content
+  md-list ng-clock=""
+    - @issues.each do |issue|
+      md-list-item layout="row" layout-align="space-between center"
+        h4 class="md-subhead"
+          = issue.name
+        div layout="row" layout-align="center center"
+          p
+            = link_to edit_issue_path(issue), :class => "md-button md-icon-button" do
+              span class="ca ca-edit"
+          p
+            = link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "md-button md-icon-button" do
+              span class="ca ca-delete"
+      
+      md-divider
+

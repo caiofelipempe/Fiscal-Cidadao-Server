@@ -1,0 +1,45 @@
+.title-subheader
+  h2.md-display-1
+    span.ca.ca-issue
+     ' Problemas reportados
+
+md-tabs.md-primary.md-hue-1 md-border-bottom="" md-dynamic-height="" md-stretch-tabs="always" style="border-radius: 0px;"
+  md-tab label="Problemas relatados"
+    md-content
+      md-list ng-clock=""
+
+        - @issue_reports.each do |issue_report|
+          md-list-item class="md-3-line md-long-text"
+            - if (issue_report.image.url != '/images/original/missing.png')
+              = image_tag(issue_report.image.url(:thumb), :class => "md-avatar")
+            - else
+              = image_tag("missing.jpg", :class => "md-avatar")
+
+            .md-list-item-text layout="column"
+              - if issue_report.issue_id != nil
+                h3
+                  = Issue.find(issue_report.issue_id).name
+              - else
+                h3
+                  ' Outro
+
+              p
+                = truncate(issue_report.description, :length => 120)
+                
+              div layout="row" layout-align="start center"
+                small
+                  span class="ca ca-place"
+                    = issue_report.address
+                small layout-margin=""
+                  span class="ca ca-calendar"
+                  = issue_report.created_at.strftime("%d/%m/%Y às %H:%M")
+
+              = link_to nil, :class => "md-button md-icon-button md-secondary" do
+                span class="ca ca-response"
+
+          md-divider
+
+  md-tab label="Problemas resolvidos"
+    md-content class="md-padding"
+      h1 class="md-display-2"
+        ' Listar problemas aqui

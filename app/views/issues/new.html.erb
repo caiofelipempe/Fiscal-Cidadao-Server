@@ -1,9 +1,0 @@
-<div class="title-subheader">
-  <h2 class="md-display-1"><span class="ca ca-issue"></span> Nova categoria</h2>
-</div>  
-
-<% if authenticate_admin? %>
-  <%= render 'form' %>
-<% else %>
-  <p>Admin permission required.</p>
-<% end %>
