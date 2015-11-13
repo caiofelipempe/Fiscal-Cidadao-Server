@@ -1,25 +1,30 @@
-<h1>Listing Issues</h1>
+<div class="title-subheader" style="position: relative;">
+  <h2 class="md-display-1"><span class="ca ca-category"></span> Categorias de problemas</h2>
+  <%= link_to new_issue_path, :class => "md-button md-fab md-fab-float" do %>
+    <span class="ca ca-plus"></span>
+  <% end %>
+</div>  
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<md-content>
+  <md-list ng-clock="">
     <% @issues.each do |issue| %>
-      <tr>
-        <td><%= issue.name %></td>
-        <td><%= link_to 'Show', issue %></td>
-        <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-        <td><%= link_to 'Destroy', issue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <md-list-item layout="row" layout-align="space-between center">
+        <h4 class="md-subhead"><%= issue.name %></h4>
+        <div layout="row" layout-align="center center">
+          <p>
+            <%= link_to edit_issue_path(issue), :class => "md-button md-icon-button" do %>
+              <span class="ca ca-edit"></span>
+            <% end %>
+          </p>
+          <p>
+            <%= link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "md-button md-icon-button" do %>
+              <span class="ca ca-delete"></span>
+            <% end %>
+          </p>
+        </div>
+      </md-list-item>
+      <md-divider>
     <% end %>
-  </tbody>
-</table>
+  </md-list>
+</md-content>
 
-<br>
-
-<%= link_to 'New Issue', new_issue_path %>

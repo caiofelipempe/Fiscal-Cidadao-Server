@@ -1,41 +1,36 @@
 <!DOCTYPE html>
-<html>
-
+<html ng-app="cidadaoApp">
 <head>
-  <title>CidadaoAlerta</title>
+  <title>Cidadão Alerta</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body ng-controller="MainCtrl">
 
-  <p id="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-
-  <header class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-      <% if user_signed_in? %>
-        <tr>
-          <p> <td><%= current_user.login %></td> </p>
-          <p> <td><%= current_user.email %></td> </p>
-        </tr>
+<% if user_signed_in? %>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        <span>Cidadão Alerta</span>
+      </h2>
+      <span flex></span>
+      <%= link_to issue_reports_path, :class => "md-button" do %>
+        <span class="ca-issue"></span>  Problemas reportados
+      <% end %>  
+      <% if current_user.admin != nil %>
+        <%= link_to issues_path, :class => "md-button" do %>
+          <span class="ca-category"></span>  Categorias
+        <% end %>
       <% end %>
-      <nav>
-        <ul class="nav navbar-nav navbar-right">
-          <% if user_signed_in? %>
-            <li><%= link_to "Reported issues", issue_reports_path %></li>
-            <% if current_user.admin != nil %>
-              <li><%= link_to "Issues", issues_path %></li>
-            <% end %>
-            <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
-          <% end %>
-        </ul>
-      </nav>
+      <%= link_to(destroy_user_session_path, :method => :delete, :class => "md-button") do %>
+        <span class="ca-logout"></span>  Logout
+      <% end %>
     </div>
-  </header>
+  </md-toolbar>
+<% end %>
 
-  <%= yield %>
+<!-- <p id="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p> -->
 
-</body>
-
-</html>
+<%= yield %>

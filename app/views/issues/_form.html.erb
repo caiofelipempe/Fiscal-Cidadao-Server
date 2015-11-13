@@ -11,11 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
+  <md-input-container flex>
+    <%= f.label :name, 'Nome' %>
     <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  </md-input-container>
+
+  <div layout="row" lauoyt-align="center start">
+    <%= f.submit 'Salvar', :class => "md-button md-raised md-accent" %>
+    <%= link_to 'Cancelar', issues_path, :class => "md-button md-raised" %>
   </div>
 <% end %>

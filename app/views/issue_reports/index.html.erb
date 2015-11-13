@@ -1,33 +1,33 @@
-<h1>Listing Issue Reports</h1>
+<div class="title-subheader">
+  <h2 class="md-display-1"><span class="ca ca-issue"></span> Problemas reportados</h2>
+</div>  
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<md-content>
+  <md-list ng-clock="">
     <% @issue_reports.each do |issue_report| %>
-      <tr>
+      <md-list-item class="md-3-line md-long-text">
         <% if issue_report.image.url != '/images/original/missing.png' %>
-          <td><%= link_to image_tag(issue_report.image.url(:thumb)), issue_report.image.url %></td>
+          <%= image_tag(issue_report.image.url(:thumb), :class => "md-avatar") %>
+        <% else %>
+          <%= image_tag("missing.jpg", :class => "md-avatar") %>
         <% end %>
-        <td>
+        <div class="md-list-item-text" layout="column">
           <% if issue_report.issue_id != nil %>
-            <b><p><%= Issue.find(issue_report.issue_id).name %></p>
+            <h3><%= Issue.find(issue_report.issue_id).name %></h3>
           <% else %>
-            <b><p>Other</p>
+            <h3>Outro</h3>
           <% end %>
-          <p><%= issue_report.address %></p></b>
-          <p><%= issue_report.description %></p>
-        </td>
-        <td><%= link_to 'Show', issue_report %></td>
-        <td><%= link_to 'Edit', edit_issue_report_path(issue_report) %></td>
-        <td><%= link_to 'Destroy', issue_report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
+          <p><%= truncate(issue_report.description, :length => 120) %></p>
+          <div layout="row" layout-align="start center">  
+            <small><span class="ca ca-place"></span> <%= issue_report.address %></small>
+            <small layout-margin=""><span class="ca ca-calendar"></span> <%= issue_report.created_at.strftime("%d/%m/%Y às %H:%M") %></small>
+          </div>
+          <%= link_to nil, :class => "md-button md-icon-button md-secondary" do %>
+            <span class="ca ca-response"></span>
+          <% end %>
+        </div>
+      </md-list-item>
+      <md-divider>
+    <% end %>  
+  </md-list>
+</md-content>
