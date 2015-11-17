@@ -68,6 +68,11 @@ module API
           end
         end
 
+        desc "List of issues."
+        get :issues do
+          Issue.all
+        end
+
         before do
           doorkeeper_authorize!
           @current_user = current_user
@@ -90,7 +95,7 @@ module API
           optional :issue_id, type: Integer, desc: "id of issue"
           requires :description, type: String, desc: "Description"
         end
-        post :issue do
+        post :issue_report do
           # issue = Issue.find(params[:issue_id])
           # if !issue
           #   raise StandardError.new "Issue id is not registered."
@@ -130,7 +135,7 @@ module API
         end
 
         desc "Get report problems."
-        get :issue_reports do
+        get :solved_issue_reports do
           array = []
           IssueReport.all.each do |issue_report|
             if resolution_report = issue_report.resolution_report
@@ -151,6 +156,61 @@ module API
                 }
               }
             end
+          end
+          array
+        end
+
+        before do
+          if current_user.admin == nil
+            raise StandardError.new 'Access denied.'
+          end
+        end
+
+        desc "Create new issue."
+        params do
+          requires :name, type: Float, desc: "Name of new issue"
+        end
+        post :issue do
+          issue = Issue.new(name: params[:name])
+          if issue.save
+            {
+              status: 'success'
+            }
+          else
+            raise StandardError.new issue.errors.messages
+          end
+        end
+
+        desc "delete issue."
+        params do
+          requires :id, type: Float, desc: "Name of new issue"
+        end
+        delete :issue do
+          issue = Issue.find(id: params[:id])
+          if issue.delete
+            {
+              status: 'success'
+            }
+          else
+            raise StandardError.new issue.errors.messages
+          end
+        end
+
+        desc "Get report problems."
+        get :issue_reports do
+          array = []
+          IssueReport.all.each do |issue_report|
+            array << {
+              id: issue_report.id,
+              user: User.find(issue_report.user_id),
+              issue: issue_report.issue,
+              description: issue_report.description,
+              latitude: issue_report.latitude,
+              longitude: issue_report.longitude,
+              address: issue_report.address,
+              image_url: issue_report.image.url(:thumb),
+              creation_time: creation_time(issue_report.created_at)
+            }
           end
           array
         end

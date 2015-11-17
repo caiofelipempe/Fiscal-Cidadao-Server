@@ -25,7 +25,7 @@ md-tabs.md-primary.md-hue-1 md-border-bottom="" md-dynamic-height="" md-stretch-
 
               p
                 = truncate(issue_report.description, :length => 120)
-                
+
               div layout="row" layout-align="start center"
                 small
                   span class="ca ca-place"
@@ -34,7 +34,7 @@ md-tabs.md-primary.md-hue-1 md-border-bottom="" md-dynamic-height="" md-stretch-
                   span class="ca ca-calendar"
                   = issue_report.created_at.strftime("%d/%m/%Y às %H:%M")
 
-              = link_to nil, :class => "md-button md-icon-button md-secondary" do
+              = link_to issue_report, :class => "md-button md-icon-button md-secondary" do
                 span class="ca ca-response"
 
           md-divider
