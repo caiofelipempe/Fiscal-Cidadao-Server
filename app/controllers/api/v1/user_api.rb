@@ -181,6 +181,23 @@ module API
           end
         end
 
+        desc "Update new issue."
+        params do
+          requires :id, type: Float, desc: "Id of new issue"
+          requires :name, type: Float, desc: "New name of issue"
+        end
+        patch :issue do
+          issue = Issue.find(id: params[:id])
+          issue.name = params[name:]
+          if issue.save
+            {
+              status: 'success'
+            }
+          else
+            raise StandardError.new issue.errors.messages
+          end
+        end
+
         desc "delete issue."
         params do
           requires :id, type: Float, desc: "Name of new issue"
