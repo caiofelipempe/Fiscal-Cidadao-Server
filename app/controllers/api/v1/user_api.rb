@@ -188,7 +188,7 @@ module API
         end
         patch :issue do
           issue = Issue.find(id: params[:id])
-          issue.name = params[name:]
+          issue.name = params[:name]
           if issue.save
             {
               status: 'success'

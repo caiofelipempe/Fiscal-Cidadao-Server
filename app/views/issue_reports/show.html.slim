@@ -1,0 +1,39 @@
+.title-subheader.show
+  h2 class="md-display-1"
+    - if @issue_report.issue_id != nil
+      = Issue.find(@issue_report.issue_id).name
+    - else
+      '  Outro
+  h4
+    = @issue_report.address
+
+  p
+    b Enviado por: 
+    = @issue_report.user.login
+    
+
+
+md-content.md-whiteframe-2dp layout-margin="" layout-padding=""
+  div layout="row" layout-align="start start"
+    - if @issue_report.image.url != '/images/original/missing.png'
+        = link_to image_tag(@issue_report.image.url(:thumb)), @issue_report.image.url
+    - else
+      = image_tag('sem_imagem.jpg', :class => "image-show")
+    p
+      = @issue_report.description
+
+
+  - if current_user.admin != nil && @issue_report.resolution_report == nil
+    = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "md-button md-raised md-accent"
+
+  - if resolution_report = @issue_report.resolution_report
+    tr
+      td
+        = resolution_report.user.login
+
+    tr
+      td
+        = resolution_report.description
+      - if current_user.admin != nil
+        td
+          = link_to 'Destroy', [@issue_report, resolution_report], method: :delete, data: { confirm: 'Are you sure?' }

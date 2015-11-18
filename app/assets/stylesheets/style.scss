@@ -55,6 +55,18 @@ html, body{
   right: 40px;
 }
 
+.image-show{
+  width: 300px;
+  height: auto;
+  margin: 0px 5px 5px 0px;
+}
+
+.title-subheader.show p,
+.title-subheader.show h4,
+.title-subheader.show h2{
+  margin: 10px 0px;
+}
+
 // Icones
 @font-face {
   font-family: 'ca';

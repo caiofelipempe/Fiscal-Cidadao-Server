@@ -10,9 +10,10 @@
         li
           = message
 
-  .field
-    = f.label :description
+  md-input-container flex=""
+    = f.label :description, 'Descrição'
     = f.text_field :description
 
-  .actions
-    = f.submit
+  div layout="row" lauoyt-align="center start"
+    = f.submit 'Salvar', :class => "md-button md-raised md-accent"
+    = link_to 'Cancelar', issues_path, :class => "md-button md-raised"
