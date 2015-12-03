@@ -25,7 +25,7 @@ md-content.md-whiteframe-2dp layout-margin="" layout-padding=""
 
 
   - if current_user.admin != nil && @issue_report.resolution_report == nil
-    = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "md-button md-raised md-accent"
+    = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
   - if resolution_report = @issue_report.resolution_report
     tr
@@ -38,3 +38,5 @@ md-content.md-whiteframe-2dp layout-margin="" layout-padding=""
       - if current_user.admin != nil
         td
           = link_to 'Destroy', [@issue_report, resolution_report], method: :delete, data: { confirm: 'Are you sure?' }
+
+  ui-gmap-google-map center='map.center' zoom='map.zoom'

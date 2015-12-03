@@ -39,6 +39,5 @@
   },
   "_source": "git://github.com/lokesh/lightbox2.git",
   "_target": "~2.8.1",
-  "_originalSource": "lightbox2",
-  "_direct": true
+  "_originalSource": "lightbox2"
 }

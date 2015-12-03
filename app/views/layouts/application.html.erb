@@ -1,36 +1,41 @@
 <!DOCTYPE html>
-<html ng-app="cidadaoApp">
+<html>
 <head>
   <title>Cidadão Alerta</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body ng-controller="MainCtrl">
+<body>
 
-<% if user_signed_in? %>
-  <md-toolbar>
-    <div class="md-toolbar-tools">
-      <h2>
-        <span>Cidadão Alerta</span>
-      </h2>
-      <span flex></span>
-      <%= link_to issue_reports_path, :class => "md-button" do %>
-        <span class="ca-issue"></span>  Problemas reportados
-      <% end %>  
-      <% if current_user.admin != nil %>
-        <%= link_to issues_path, :class => "md-button" do %>
-          <span class="ca-category"></span>  Categorias
-        <% end %>
-      <% end %>
-      <%= link_to(destroy_user_session_path, :method => :delete, :class => "md-button") do %>
-        <span class="ca-logout"></span>  Logout
-      <% end %>
-    </div>
-  </md-toolbar>
-<% end %>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <% if user_signed_in? %>
+      <header class="mdl-layout__header">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title">Cidadão Alerta</span>
+          <div class="mdl-layout-spacer"></div>
+          <nav class="mdl-navigation mdl-layout--large-screen-only">
+            <%= link_to issue_reports_path, :class => "mdl-navigation__link" do %>
+              <span class="ca-issue"></span>  Problemas reportados
+            <% end %>  
+            <% if current_user.admin != nil %>
+              <%= link_to issues_path, :class => "mdl-navigation__link" do %>
+                <span class="ca-category"></span>  Categorias
+              <% end %>
+            <% end %>
+            <%= link_to(destroy_user_session_path, :method => :delete, :class => "mdl-navigation__link") do %>
+              <span class="ca-logout"></span>  Logout
+            <% end %>
+          </nav>
+        </div>
+      </header>
+    <% end %>
+    <main class="mdl-layout__content">
+      <div class="page-content"><%= yield %></div>
+    </main>
+  </div>
 
-<!-- <p id="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p> -->
+<p id="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 
-<%= yield %>
+
