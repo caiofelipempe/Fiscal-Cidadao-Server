@@ -1,24 +1,25 @@
 .title-subheader style="position: relative;"
-  h2 class="md-display-1"
+  h2.display-1
     span class="ca ca-category"
-      ' Categorias de problemas
+    '  Categorias de problemas
+  
   = link_to new_issue_path, :class => "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float" do
     span class="ca ca-plus"
 
-
-md-content
-  md-list ng-clock=""
-    - @issues.each do |issue|
-      md-list-item layout="row" layout-align="space-between center"
-        h4 class="md-subhead"
-          = issue.name
-        div layout="row" layout-align="center center"
-          p
-            = link_to edit_issue_path(issue), :class => "md-button md-icon-button" do
+.mdl-grid style="margin-top: 30px;"
+  table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
+    thead
+      tr
+        th.mdl-data-table__cell--non-numeric Tipo
+        th Editar
+        th Deletar
+    tbody
+      - @issues.each do |issue|
+        tr
+          td.mdl-data-table__cell--non-numeric = issue.name
+          td 
+            = link_to edit_issue_path(issue), :class => "mdl-button" do
               span class="ca ca-edit"
-          p
-            = link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "md-button md-icon-button" do
+          td 
+            = link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "mdl-button" do
               span class="ca ca-delete"
-      
-      md-divider
-

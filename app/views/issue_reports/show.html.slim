@@ -1,10 +1,10 @@
 .title-subheader.show
-  h2 class="md-display-1"
+  h2.display-1
     - if @issue_report.issue_id != nil
       = Issue.find(@issue_report.issue_id).name
     - else
       '  Outro
-  h4
+  h4.headline
     = @issue_report.address
 
   p
@@ -13,30 +13,60 @@
     
 
 
-md-content.md-whiteframe-2dp layout-margin="" layout-padding=""
-  div layout="row" layout-align="start start"
-    - if @issue_report.image.url != '/images/original/missing.png'
-        = link_to image_tag(@issue_report.image.url(:thumb)), @issue_report.image.url
-    - else
-      = link_to image_url('sem_imagem.jpg'), :data => { :lightbox => "image-1" } 
-        = image_tag('sem_imagem.jpg', :class => "image-show")
-    p
-      = @issue_report.description
+.mdl-grid
+  div.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
+    .mdl-grid
+      - if (@issue_report.image.url != '/images/original/missing.png')
+        .demo-card-image.mdl-card.mdl-cell.mdl-cell--3-col mdl-shadow--2dp style="background-image: url(#{image_url(issue_report.image.url(:thumb))});"
+          .mdl-card__actions.mdl-card--border
+
+      - else
+        .details-card-image.mdl-card.mdl-cell.mdl-cell--3-col style="background-image: url(#{image_url('missing.jpg')});"
+          .mdl-card__actions.mdl-card--border
+            a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+             span.ca.ca-expand
+      
+      p.mdl-cell.mdl-cell--9-col
+        = @issue_report.description
+
+      div#map.mdl-cell.mdl-cell--12-col  
 
 
-  - if current_user.admin != nil && @issue_report.resolution_report == nil
-    = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+    /   - if @issue_report.image.url != '/images/original/missing.png'
+    /       = link_to image_tag(@issue_report.image.url(:thumb)), @issue_report.image.url
+    /   - else
+    /     = link_to image_url('sem_imagem.jpg'), :data => { :lightbox => "image-1" } 
+    /       = image_tag('sem_imagem.jpg', :class => "image-show")
 
-  - if resolution_report = @issue_report.resolution_report
-    tr
-      td
-        = resolution_report.user.login
 
-    tr
-      td
-        = resolution_report.description
-      - if current_user.admin != nil
-        td
-          = link_to 'Destroy', [@issue_report, resolution_report], method: :delete, data: { confirm: 'Are you sure?' }
+    / - if current_user.admin != nil && @issue_report.resolution_report == nil
+    /   = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
-  ui-gmap-google-map center='map.center' zoom='map.zoom'
+    / - if resolution_report = @issue_report.resolution_report
+    /   tr
+    /     td
+    /       = resolution_report.user.login
+
+    /   tr
+    /     td
+    /       = resolution_report.description
+    /     - if current_user.admin != nil
+    /       td
+    /         = link_to 'Destroy', [@issue_report, resolution_report], method: :delete, data: { confirm: 'Are you sure?' }
+
+    / ui-gmap-google-map center='map.center' zoom='map.zoom'
+
+
+javascript:
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+    markers = handler.addMarkers([
+      {
+        "lat": #{@issue_report.latitude},
+        "lng": #{@issue_report.longitude}
+      }
+    ]);
+    handler.bounds.extendWith(markers);
+    handler.fitMapToBounds();
+    handler.getMap().setZoom(16);
+  });
