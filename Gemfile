@@ -6,6 +6,7 @@ gem 'grape'
 gem 'paperclip'
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'magnific-popup-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

@@ -1,5 +1,6 @@
 /*
- *= require material-design-lite/material.min
+ *= require material-design-lite/material.min 
+ *= require magnific-popup
  *= require_tree .
  *= require_self
  */

@@ -11,34 +11,33 @@
 </head>
 <body>
 
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <% if user_signed_in? %>
+  <% if user_signed_in? %>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
           <span class="mdl-layout-title">Cidadão Alerta</span>
           <div class="mdl-layout-spacer"></div>
           <nav class="mdl-navigation mdl-layout--large-screen-only">
-            <%= link_to issue_reports_path, :class => "mdl-navigation__link" do %>
+            <%= link_to issue_reports_path, :class => "mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" do %>
               <span class="ca-issue"></span>  Problemas reportados
             <% end %>  
             <% if current_user.admin != nil %>
-              <%= link_to issues_path, :class => "mdl-navigation__link" do %>
+              <%= link_to issues_path, :class => "mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" do %>
                 <span class="ca-category"></span>  Categorias
               <% end %>
             <% end %>
-            <%= link_to(destroy_user_session_path, :method => :delete, :class => "mdl-navigation__link") do %>
+            <%= link_to(destroy_user_session_path, :method => :delete, :class => "mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white") do %>
               <span class="ca-logout"></span>  Logout
             <% end %>
           </nav>
         </div>
       </header>
-    <% end %>
-    <main class="mdl-layout__content">
-      <div class="page-content"><%= yield %></div>
-    </main>
-  </div>
-
-  <!-- <p id="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
- -->
-
+      <main class="mdl-layout__content">
+        <div class="page-content"><%= yield %></div>
+      </main>
+    </div>
+  <% else %>
+    <p id="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <%= yield %>
+  <% end %>

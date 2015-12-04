@@ -1,29 +1,31 @@
 div class="login"
   div class="content"
-    div class="login-box"
-      p
-        ' LOGIN
+    .mdl-layout.mdl-js-layout
+      main.mdl-layout__content
+        .mdl-card.mdl-shadow--8dp
+          .mdl-card__title.mdl-color--primary.mdl-color-text--white
+            h1.mdl-card__title-text Login
+          .mdl-card__supporting-text
+            = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+              .mdl-textfield.mdl-js-textfield
+                = f.label :email, "E-mail", :class => "mdl-textfield__label"
+                = f.email_field :email, autofocus: true, :class => "mdl-textfield__input"
 
-      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        div class="mdl-textfield mdl-js-textfield"
-          = f.label :email, "E-mail"
-          = f.email_field :email, autofocus: true
+              .mdl-textfield.mdl-js-textfield
+                = f.label :password, "Senha", :class => "mdl-textfield__label"
+                = f.password_field :password, autocomplete: "off", :class => "mdl-textfield__input"
 
-        div class="mdl-textfield mdl-js-textfield"
-          = f.label :password, "Senha"
-          = f.password_field :password, autocomplete: "off"
+              - if devise_mapping.rememberable?
+                div class="mdl-textfield mdl-js-textfield"
+                  = f.check_box :remember_me
+                  = f.label :remember_me, "Lembrar minha senha"
 
-        - if devise_mapping.rememberable?
-          div class="mdl-textfield mdl-js-textfield"
-            = f.check_box :remember_me
-            = f.label :remember_me, "Lembrar minha senha"
+              .text-center    
+                = f.submit "Entrar", :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
-        div
-          = f.submit "Entrar", :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+          .mdl-card__actions.mdl-card--border
+            - if devise_mapping.registerable? && controller_name != 'registrations'
+              = link_to "Cadastrar", new_registration_path(resource_name), :class => "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
 
-      div
-        - if devise_mapping.registerable? && controller_name != 'registrations'
-          = link_to "Cadastrar", new_registration_path(resource_name), :class => "md-button"
-
-        - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
-          = link_to "Esqueci minha senha", new_password_path(resource_name), :class => "md-button"
+            - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+              = link_to "Esqueci minha senha", new_password_path(resource_name), :class => "mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"

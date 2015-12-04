@@ -5,8 +5,8 @@
 
 .mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
   .mdl-tabs__tab-bar
-    a.mdl-tabs__tab.is-active href="#problemas_relatados"  Problemas relatados
-    a.mdl-tabs__tab href="#problemas_resolvidos"  Problemas resolvidos
+    a.mdl-tabs__tab.is-active href="#problemas_relatados" style="width: 50%;"  Problemas relatados
+    a.mdl-tabs__tab href="#problemas_resolvidos" style="width: 50%;" Problemas resolvidos
   #problemas_relatados.mdl-tabs__panel.is-active
 
     div class="mdl-grid"
@@ -37,8 +37,15 @@
               span class="ca ca-place"
               = " " + issue_report.address
           .mdl-card__menu
-            = link_to issue_report, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" do
-              i.ca.ca-response
+            span.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect id="e-by-#{issue_report.id}"
+              i.ca.ca-user
+            div class="mdl-tooltip" for="e-by-#{issue_report.id}"
+              ' Enviado por: 
+              = issue_report.user.login
+            = link_to issue_report, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect", :id => "resp-#{issue_report.id}" do
+              i.ca.ca-response-2
+            div class="mdl-tooltip" for="resp-#{issue_report.id}"
+              ' Ver detalhes e responder
 
   #problemas_resolvidos.mdl-tabs__panel
     md-content class="md-padding"

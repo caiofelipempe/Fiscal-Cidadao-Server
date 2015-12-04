@@ -3,6 +3,20 @@ html, body{
   padding: 0px;
 }
 
+.login .mdl-layout {
+  align-items: center;
+  justify-content: center;
+}
+
+.login .mdl-layout__content {
+  padding: 24px;
+  flex: none;
+}
+
+.text-center{
+  text-align: center !important;
+}
+
 #map{
   height: 300px;
 }
@@ -98,6 +112,9 @@ html, body{
   -moz-osx-font-smoothing: grayscale;
 }
 
+.ca-user:before {
+  content: "\e90c";
+}
 .ca-expand:before {
   content: "\e90a";
 }
@@ -162,4 +179,27 @@ html, body{
 .info-card-wide > .mdl-card__menu {
   color: #fff;
   font-weight: bold;
+}
+
+.mfp-with-zoom .mfp-container,
+.mfp-with-zoom.mfp-bg {
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+  /* ideally, transition speed should match zoom duration */
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.mfp-with-zoom.mfp-ready .mfp-container {
+    opacity: 1;
+}
+.mfp-with-zoom.mfp-ready.mfp-bg {
+    opacity: 0.8;
+}
+
+.mfp-with-zoom.mfp-removing .mfp-container,
+.mfp-with-zoom.mfp-removing.mfp-bg {
+  opacity: 0;
 }

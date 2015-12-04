@@ -23,7 +23,7 @@
       - else
         .details-card-image.mdl-card.mdl-cell.mdl-cell--3-col style="background-image: url(#{image_url('missing.jpg')});"
           .mdl-card__actions.mdl-card--border
-            a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect"
+            a href="#{image_url('missing.jpg')}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
              span.ca.ca-expand
       
       p.mdl-cell.mdl-cell--9-col
@@ -31,30 +31,26 @@
 
       div#map.mdl-cell.mdl-cell--12-col  
 
+      div.mdl-cell.mdl-cell--12-col 
+        - if current_user.admin != nil && @issue_report.resolution_report == nil
+          h3 Responder
+          = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
-    /   - if @issue_report.image.url != '/images/original/missing.png'
-    /       = link_to image_tag(@issue_report.image.url(:thumb)), @issue_report.image.url
-    /   - else
-    /     = link_to image_url('sem_imagem.jpg'), :data => { :lightbox => "image-1" } 
-    /       = image_tag('sem_imagem.jpg', :class => "image-show")
+        - if resolution_report = @issue_report.resolution_report
+          h3 Resposta
+          p
+            strong Respondido em: 
+            ' 
+            = resolution_report.created_at.strftime("%d/%m/%Y às %H:%M")
+          p
+            = resolution_report.description
+          - if current_user.admin != nil
+            td
+              = link_to 'Deletar resposta', [@issue_report, resolution_report], method: :delete, :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", data: { confirm: 'Tem certeza que deseja deletar essa resposta?' }
 
 
-    / - if current_user.admin != nil && @issue_report.resolution_report == nil
-    /   = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
-    / - if resolution_report = @issue_report.resolution_report
-    /   tr
-    /     td
-    /       = resolution_report.user.login
 
-    /   tr
-    /     td
-    /       = resolution_report.description
-    /     - if current_user.admin != nil
-    /       td
-    /         = link_to 'Destroy', [@issue_report, resolution_report], method: :delete, data: { confirm: 'Are you sure?' }
-
-    / ui-gmap-google-map center='map.center' zoom='map.zoom'
 
 
 javascript:
@@ -69,4 +65,9 @@ javascript:
     handler.bounds.extendWith(markers);
     handler.fitMapToBounds();
     handler.getMap().setZoom(16);
+  });
+
+  $('.test-popup-link').magnificPopup({
+    type: 'image',
+    titleSrc: 'title'
   });

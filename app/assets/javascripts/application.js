@@ -2,7 +2,7 @@
 //= require jquery_ujs
 
 //= require material-design-lite/material
-//= require lightbox2/dist/js/lightbox.min
+//= require magnific-popup
 
 //= require underscore
 //= require gmaps/google
