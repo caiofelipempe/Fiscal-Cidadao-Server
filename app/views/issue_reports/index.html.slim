@@ -37,12 +37,12 @@
               span class="ca ca-place"
               = " " + issue_report.address
           .mdl-card__menu
-            span.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect id="e-by-#{issue_report.id}"
+            span.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect.btn-padding  id="e-by-#{issue_report.id}"
               i.ca.ca-user
             div class="mdl-tooltip" for="e-by-#{issue_report.id}"
               ' Enviado por: 
               = issue_report.user.login
-            = link_to issue_report, :class => "mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect", :id => "resp-#{issue_report.id}" do
+            = link_to issue_report, :class => "btn-padding mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect", :id => "resp-#{issue_report.id}" do
               i.ca.ca-response-2
             div class="mdl-tooltip" for="resp-#{issue_report.id}"
               ' Ver detalhes e responder
