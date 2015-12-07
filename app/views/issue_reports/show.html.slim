@@ -36,9 +36,13 @@
           h3 Responder
           / = render :partial => 'resolution_report/form', :issue_report_id => @issue_report
           / = render :template => 'resolution_report/new'
-          = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
 
-        - if resolution_report = @issue_report.resolution_report
+          - @resolution_report = @issue_report.build_resolution_report
+          == render 'resolution_report/form'
+          / = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+
+
+        - elsif resolution_report = @issue_report.resolution_report
           h3 Resposta
           p
             strong Respondido em: 
