@@ -32,18 +32,16 @@
       div#map.mdl-cell.mdl-cell--12-col  
 
       div.mdl-cell.mdl-cell--12-col 
-        - if current_user.admin != nil && @issue_report.resolution_report == nil
-          h3 Responder
-          / = render :partial => 'resolution_report/form', :issue_report_id => @issue_report
-          / = render :template => 'resolution_report/new'
+        - if !current_user.admin.nil? && @issue_report.resolution_report.nil?
+          .mdl-grid  
+            .mdl-cell.mdl-cell--12-col 
+              h4 style="margin-bottom: 0px;" Responder
 
-          - @resolution_report = @issue_report.build_resolution_report
-          == render 'resolution_report/form'
-          / = link_to 'Responder', new_issue_report_resolution_report_path(@issue_report), :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-
+              - @resolution_report = @issue_report.build_resolution_report
+              == render 'resolution_report/form'
 
         - elsif resolution_report = @issue_report.resolution_report
-          h3 Resposta
+          h4 style="margin-bottom: 0px;" Resposta
           p
             strong Respondido em: 
             ' 
@@ -53,8 +51,6 @@
           - if current_user.admin != nil
             td
               = link_to 'Deletar resposta', [@issue_report, resolution_report], method: :delete, :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", data: { confirm: 'Tem certeza que deseja deletar essa resposta?' }
-
-
 
 
 

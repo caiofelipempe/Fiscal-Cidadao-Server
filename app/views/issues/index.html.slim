@@ -3,23 +3,59 @@
     span class="ca ca-category"
     '  Categorias de problemas
   
-  = link_to new_issue_path, :class => "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float" do
-    span class="ca ca-plus"
+  button href="#teste_form" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float new_popup"
+    i class="ca ca-plus"
+  / = link_to new_issue_path, :class => "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float" do
+  /   span class="ca ca-plus new_popup"
+
+div#teste_form.white-popup-block.mfp-hide.small-dialog
+  h4 Nova categoria
+  form
+    .mdl-textfield.mdl-js-textfield style="width: 100%;"
+      label.mdl-textfield__label  
+        ' Nome da categoria
+      input class="mdl-textfield__input"
+
+    div
+      button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+        ' Salvar
 
 .mdl-grid style="margin-top: 30px;"
   table.mdl-data-table.mdl-js-data-table.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
     thead
       tr
         th.mdl-data-table__cell--non-numeric Tipo
-        th Editar
-        th Deletar
+        th.mdl-data-table__cell--non-numeric.text-center Editar
+        th.mdl-data-table__cell--non-numeric.text-center Deletar
     tbody
       - @issues.each do |issue|
         tr
           td.mdl-data-table__cell--non-numeric = issue.name
-          td 
+          td.mdl-data-table__cell--non-numeric.text-center 
             = link_to edit_issue_path(issue), :class => "mdl-button" do
               span class="ca ca-edit"
-          td 
+          td.mdl-data-table__cell--non-numeric.text-center 
             = link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "mdl-button" do
               span class="ca ca-delete"
+
+
+javascript:
+
+  $(document).ready(function() {
+
+    $('.new_popup').magnificPopup({
+      type: 'inline',
+
+      fixedContentPos: false,
+      fixedBgPos: true,
+
+      overflowY: 'auto',
+
+      closeBtnInside: true,
+      preloader: false,
+      
+      midClick: true,
+      removalDelay: 300,
+      mainClass: 'my-mfp-zoom-in'
+    });
+  });

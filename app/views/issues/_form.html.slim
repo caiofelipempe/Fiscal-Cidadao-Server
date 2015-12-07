@@ -10,10 +10,10 @@
         li
           = message
 
-  md-input-container flex=""
-    = f.label :name, 'Nome'
-    = f.text_field :name
+  .mdl-textfield.mdl-js-textfield
+    = f.label :name, 'Nome', :class => "mdl-textfield__label"  
+    = f.text_field :name, :class => "mdl-textfield__input"
 
-  div layout="row" lauoyt-align="center start"
-    = f.submit 'Salvar', :class => "md-button md-raised md-accent"
-    = link_to 'Cancelar', issues_path, :class => "md-button md-raised"
+  div
+    = f.submit 'Salvar', :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+    / = link_to 'Cancelar', issues_path, :class => "md-button md-raised"
