@@ -15,5 +15,5 @@ country_list = [
 ]
 
 country_list.each do |address, description|
-  IssueReport.create(user_id: 1, latitude: -3.739333, longitude: -38.574839, address: address, description: description)
+  IssueReport.create(user_id: 1, issue_id: 1, latitude: -3.739333, longitude: -38.574839, address: address, description: description)
 end

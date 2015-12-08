@@ -5,7 +5,7 @@ class IssueReportsController < ApplicationController
   # GET /issue_reports
   # GET /issue_reports.json
   def index
-    @issue_reports_resolvido = IssueReport.joins("LEFT OUTER JOIN resolution_reports on resolution_reports.issue_report_id = issue_reports.id")
+    @issue_reports_resolvido = IssueReport.all
     @issue_reports_not_resolvido = IssueReport.joins(:resolution_report)
   end
 

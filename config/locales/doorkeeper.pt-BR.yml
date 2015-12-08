@@ -1,0 +1,69 @@
+# encoding: UTF-8
+pt-BR:
+  activerecord:
+    errors:
+      models:
+        application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'não pode conter um fragemento.'
+              has_query_parameter: 'não pode conter uma parâmetro de query.'
+              invalid_uri: 'deve ser uma URI válida.'
+              relative_uri: 'deve ser uma URI absoluta.'
+  mongoid:
+    errors:
+      models:
+        application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'não pode conter um fragemento.'
+              has_query_parameter: 'não pode conter uma parâmetro de query.'
+              invalid_uri: 'deve ser uma URI válida.'
+              relative_uri: 'deve ser uma URI absoluta.'
+  mongo_mapper:
+    errors:
+      models:
+        application:
+          attributes:
+            redirect_uri:
+              fragment_present: 'não pode conter um fragemento.'
+              has_query_parameter: 'não pode conter uma parâmetro de query.'
+              invalid_uri: 'deve ser uma URI válida.'
+              relative_uri: 'deve ser uma URI absoluta.'
+  doorkeeper:
+    errors:
+      messages:
+        # Common error messages
+        invalid_request: 'Está faltando uma parâmetro necessário na requisição, foi incluso um valor de parâmetro não suportado, ou não está como deveria.'
+        invalid_redirect_uri: 'A uri de redirecionamento inclusa não é válida.'
+        unauthorized_client: 'O cliente não está autorizado para executar essa requisição usando esse método.'
+        access_denied: 'O dono do recurso ou servidor de autorização negou a solicitação'
+        invalid_scope: 'O escopo requisitado é inválido, desconhecido ou mal formatado.'
+        server_error: 'O servidor de autorização encontrou uma condição inesperada que evitou ele de realizar a requisição.'
+        temporarily_unavailable: 'O servidor de autorização está temporariamente incapz de manipular a requisição devido há um sobrecarregamento temporário ou manutenção do servidor.'
+
+        #configuration error messages
+        credential_flow_not_configured: 'Resource Owner Password Credentials flow failed due to Doorkeeper.configure.resource_owner_from_credentials being unconfigured.'
+        resource_owner_authenticator_not_configured: 'Resource Owner find failed due to Doorkeeper.configure.resource_owner_authenticator being unconfiged.'
+
+        # Access grant errors
+        unsupported_response_type: 'O servidor de autorização não suporta esse tipo de resposta.'
+
+        # Access token errors
+        invalid_client: 'Autenticação do cliente falhou devido há um cliente desconhecido, nenhum cliente de autenticação incluso, ou método de autenticação não suportado.'
+        invalid_grant: 'A permissão de autorização provida é inválida, está expirada, revogada, não coincide com a URI de redirecionamento usada na requisição de autorização ou foi emitida por outro cliente.'
+        unsupported_grant_type: 'O tipo de permissão de autorização não é suportado pelo servidor de autorização.'
+
+        # Password Access token errors
+        invalid_resource_owner: 'As credenciais do dono do recurso providas não são válidas, ou o dono do recurso não pode ser encontrado.'
+    flash:
+      applications:
+        create:
+          notice: 'Aplicação criada.'
+        destroy:
+          notice: 'Aplicação destruída.'
+        update:
+          notice: 'Aplicação atualizada.'
+      authorized_applications:
+        destroy:
+          notice: 'Aplicação revogada.'
