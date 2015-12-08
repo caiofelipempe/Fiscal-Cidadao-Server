@@ -7,10 +7,11 @@
   .mdl-tabs__tab-bar
     a.mdl-tabs__tab.is-active href="#problemas_relatados" style="width: 50%;"  Problemas relatados
     a.mdl-tabs__tab href="#problemas_resolvidos" style="width: 50%;" Problemas resolvidos
+
   #problemas_relatados.mdl-tabs__panel.is-active
 
     div class="mdl-grid"
-      - @issue_reports.each do |issue_report|
+      - @issue_reports_resolvido.each do |issue_report|
         = link_to issue_report, :class => "card_link"
           .info-card-wide.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col
             - if (issue_report.image.url != '/images/original/missing.png')
@@ -46,5 +47,36 @@
 
   #problemas_resolvidos.mdl-tabs__panel
     md-content class="md-padding"
-      h1 class="md-display-2"
-        ' Listar problemas aqui
+    - @issue_reports_not_resolvido.each do |issue_report|
+      = link_to issue_report, :class => "card_link"
+        .info-card-wide.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col
+          - if (issue_report.image.url != '/images/original/missing.png')
+            .mdl-card__title style="background-image: url(#{image_url(issue_report.image.url(:thumb))}); height: 175px;"
+              h2.mdl-card__title-text style="color: #FFF;"
+                - if issue_report.issue_id != nil
+                  = Issue.find(issue_report.issue_id).name
+                - else  
+                  ' Outro
+          - else
+            .mdl-card__title style="background-image: url(#{image_url('missing.jpg')}); height: 175px;"
+              h2.mdl-card__title-text style="color: #FFF;"
+                - if issue_report.issue_id != nil
+                  = Issue.find(issue_report.issue_id).name
+                - else  
+                  ' Outro
+
+          .mdl-card__supporting-date style="  color: rgba(0, 0, 0, 0.54) !important; font-size: 13px !important; line-height: 18px !important; overflow: hidden; padding: 16px 16px 0px 16px; width: 90%;"
+            span class="ca ca-calendar"
+            = " " + issue_report.created_at.strftime("%d/%m/%Y às %H:%M")
+          .mdl-card__supporting-text
+            = truncate(issue_report.description, :length => 120)
+          .mdl-card__actions.mdl-card--border
+            a.mdl-button disabled="" style="color: #666;"
+              span class="ca ca-place"
+              = " " + issue_report.address
+          .mdl-card__menu
+            span.mdl-button.mdl-button--icon.mdl-js-button.mdl-js-ripple-effect.btn-padding  id="e-by-#{issue_report.id}" style="color: #FFF;"
+              i.ca.ca-user
+            div class="mdl-tooltip" for="e-by-#{issue_report.id}"
+              ' Enviado por: 
+              = issue_report.user.login
