@@ -3,12 +3,15 @@
     span class="ca ca-category"
     '  Categorias de problemas
   
-  button href="#teste_form" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float new_popup"
+  button href="#new_form" class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float new_popup"
     i class="ca ca-plus"
   / = link_to new_issue_path, :class => "mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored md-fab-float" do
   /   span class="ca ca-plus new_popup"
 
-div#teste_form.white-popup-block.mfp-hide.small-dialog
+div#new_form.white-popup-block.mfp-hide.small-dialog
+  //O formulário de criação vai aqui
+  //Apagar o de baixo, é só uma teste
+
   h4 Nova categoria
   form
     .mdl-textfield.mdl-js-textfield style="width: 100%;"
@@ -32,8 +35,26 @@ div#teste_form.white-popup-block.mfp-hide.small-dialog
         tr
           td.mdl-data-table__cell--non-numeric = issue.name
           td.mdl-data-table__cell--non-numeric.text-center 
-            = link_to edit_issue_path(issue), :class => "mdl-button" do
+            button href="#edit_form" class="mdl-button edit_popup"
               span class="ca ca-edit"
+
+            div#edit_form.white-popup-block.mfp-hide.small-dialog
+              //O formulário de criação vai aqui
+              //Apagar o de baixo, é só uma teste
+
+              h4 Editar categoria
+              form
+                .mdl-textfield.mdl-js-textfield style="width: 100%;"
+                  label.mdl-textfield__label  
+                    ' Nome da categoria
+                  input class="mdl-textfield__input" value="Teste"
+
+                div
+                  button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                    ' Salvar
+
+            / = link_to edit_issue_path(issue), :class => "mdl-button" do
+              / span class="ca ca-edit"
           td.mdl-data-table__cell--non-numeric.text-center 
             = link_to issue, method: :delete, data: { confirm: 'Tem certeza que deseja remover esse item?' }, :class => "mdl-button" do
               span class="ca ca-delete"
@@ -43,7 +64,7 @@ javascript:
 
   $(document).ready(function() {
 
-    $('.new_popup').magnificPopup({
+    $('.new_popup, .edit_popup').magnificPopup({
       type: 'inline',
 
       fixedContentPos: false,

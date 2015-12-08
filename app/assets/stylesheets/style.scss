@@ -94,6 +94,10 @@ html, body{
   margin: 10px 0px;
 }
 
+a .mdl-card{
+  height: auto;
+}
+
 // Icones
 @font-face {
   font-family: 'ca';
@@ -169,23 +173,10 @@ html, body{
   background: center / cover;
 }
 
-.info-card-wide > .mdl-card__supporting-date {
-  color: rgba(0, 0, 0, 0.54);
-  font-size: 13px;
-  line-height: 18px;
-  overflow: hidden;
-  padding: 16px 16px 0px 16px;
-  width: 90%;
-}
-.info-card-wide > .mdl-card__title {
-  color: #fff;
-  height: 176px;
+a.card_link{
+  text-decoration: none;
 }
 
-.info-card-wide > .mdl-card__menu {
-  color: #fff;
-  font-weight: bold;
-}
 
 .mfp-with-zoom .mfp-container,
 .mfp-with-zoom.mfp-bg {
