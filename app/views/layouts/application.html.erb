@@ -37,7 +37,10 @@
       </main>
     </div>
   <% else %>
-    <!-- <div id="notice"><%= notice %></div>
-    <div class="alert"><%= alert %></div> -->
+    <% if !notice.nil? %>
+      <div class="notice"><%= notice %></div>
+    <% elsif !alert.nil? %>
+      <div class="alert"><%= alert %></div>
+    <% end %>
     <%= yield %>
   <% end %>

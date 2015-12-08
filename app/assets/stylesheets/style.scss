@@ -1,5 +1,33 @@
 $primary_color: #3F51B5;
 
+.devise_error{
+  background-color: #FF4081;
+  color: #FFF;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.devise_error ul{
+  list-style: none;
+}
+
+.notice, .alert{
+  position: absolute;
+  z-index: 999999;
+  background-color: #FFF;
+  color: #666;
+  padding: 20px 30px;
+  border-radius: 5px;
+  margin: 20px 0 auto;
+  text-align: center;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+
 html, body{
   margin: 0px;
   padding: 0px;
