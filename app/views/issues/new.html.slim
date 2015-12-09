@@ -1,0 +1,20 @@
+div#new_form.white-popup-block.mfp-hide.small-dialog
+  h4 Nova categoria  
+  = form_for(@issue) do |f|
+    - if @issue.errors.any?
+      #error_explanation"
+        h2
+          = pluralize(@issue.errors.count, "error")
+          ' prohibited this issue from being saved:
+
+        ul
+        - @issue.errors.full_messages.each do |message|
+          li
+            = message
+
+    .mdl-textfield.mdl-js-textfield style="width: 100%;"
+      = f.label :name, 'Nome', :class => "mdl-textfield__label"  
+      = f.text_field :name, :class => "mdl-textfield__input"
+
+    div
+      = f.submit 'Salvar', :class => "mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"

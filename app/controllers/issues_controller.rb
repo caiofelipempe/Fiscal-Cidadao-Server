@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
   # GET /issues
   # GET /issues.json
   def index
-    @issues = Issue.all
+    @issues = Issue.all.order(:id)
     @issue = Issue.new
   end
 
@@ -16,11 +16,13 @@ class IssuesController < ApplicationController
 
   # GET /issues/new
   def new
+    render :layout => false
     @issue = Issue.new
   end
 
   # GET /issues/1/edit
   def edit
+    render :layout => false
   end
 
   # POST /issues
@@ -45,8 +47,8 @@ class IssuesController < ApplicationController
   def update
     respond_to do |format|
       if @issue.update(issue_params)
-        format.html { redirect_to @issue, notice: 'Issue was successfully updated.' }
-        format.json { render :show, status: :ok, location: @issue }
+        format.html { redirect_to action: "index", notice: 'Issue was successfully updated.' }
+        format.json { render action: "index", status: :ok, location: @issue }
       else
         format.html { render :edit }
         format.json { render json: @issue.errors, status: :unprocessable_entity }

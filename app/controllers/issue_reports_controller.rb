@@ -5,7 +5,7 @@ class IssueReportsController < ApplicationController
   # GET /issue_reports
   # GET /issue_reports.json
   def index
-    @issue_reports_resolvido = IssueReport.all
+    @issue_reports_resolvido = IssueReport.all.order(:created_at)
     @issue_reports_not_resolvido = IssueReport.joins(:resolution_report)
   end
 
