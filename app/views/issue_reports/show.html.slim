@@ -8,33 +8,34 @@
     = @issue_report.address
 
   p
-    b Enviado por: 
+    b Enviado por:
     = @issue_report.user.login
-    
+
 
 
 .mdl-grid
   div.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
     .mdl-grid
       - if (@issue_report.image.url != '/images/original/missing.png')
-        .demo-card-image.mdl-card.mdl-cell.mdl-cell--3-col mdl-shadow--2dp style="background-image: url(#{image_url(issue_report.image.url(:thumb))});"
+        .details-card-image.mdl-card.mdl-cell.mdl-cell--3-col.mdl-shadow--2dp style="background-image: url(#{image_url(@issue_report.image.url(:thumb))});"
           .mdl-card__actions.mdl-card--border
-
+            a href="#{image_url(@issue_report.image.url(:original))}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
+              span.ca.ca-expand
       - else
         .details-card-image.mdl-card.mdl-cell.mdl-cell--3-col style="background-image: url(#{image_url('missing.jpg')});"
           .mdl-card__actions.mdl-card--border
             a href="#{image_url('missing.jpg')}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
              span.ca.ca-expand
-      
+
       p.mdl-cell.mdl-cell--9-col
         = @issue_report.description
 
-      div#map.mdl-cell.mdl-cell--12-col  
+      div#map.mdl-cell.mdl-cell--12-col
 
-      div.mdl-cell.mdl-cell--12-col 
+      div.mdl-cell.mdl-cell--12-col
         - if !current_user.admin.nil? && @issue_report.resolution_report.nil?
-          .mdl-grid  
-            .mdl-cell.mdl-cell--12-col 
+          .mdl-grid
+            .mdl-cell.mdl-cell--12-col
               h4 style="margin-bottom: 0px;" Responder
 
               - @resolution_report = @issue_report.build_resolution_report
@@ -43,8 +44,8 @@
         - elsif resolution_report = @issue_report.resolution_report
           h4 style="margin-bottom: 0px;" Resposta
           p
-            strong Respondido em: 
-            ' 
+            strong Respondido em:
+            '
             = resolution_report.created_at.strftime("%d/%m/%Y às %H:%M")
           p
             = resolution_report.description
