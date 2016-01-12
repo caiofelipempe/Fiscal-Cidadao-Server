@@ -1,5 +1,21 @@
 $primary_color: #3F51B5;
 
+.mdl-button--fab.mdl-button--colored{
+  background-color: #00CFAD;
+}
+
+.mdl-button--fab.mdl-button--colored:hover{
+  background-color: lighten(#00CFAD, 2%);
+}
+
+.mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab {
+  background-color: #00CFAD;
+}
+
+.mdl-button--accent.mdl-button--accent.mdl-button--raised:hover, .mdl-button--accent.mdl-button--accent.mdl-button--fab:hover {
+  background-color: lighten(#00CFAD, 2%);
+}
+
 .devise_error{
   background-color: #FF4081;
   color: #FFF;

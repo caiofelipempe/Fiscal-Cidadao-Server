@@ -6,4 +6,5 @@ class IssueReport < ActiveRecord::Base
 
   has_attached_file :image, styles: { thumb: "100x100>" }, :dependent => :delete
   validates_attachment :image, :content_type => { :content_type => 'image/jpeg' }, :size => { :in => 0..5000.kilobytes }
+
 end
