@@ -1,5 +1,16 @@
 $primary_color: #3F51B5;
 
+.logo-login{
+  height: 140px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+.text-center{
+  text-align: center;
+}
+
 .mdl-button--fab.mdl-button--colored{
   background-color: #00CFAD;
 }
@@ -14,6 +25,16 @@ $primary_color: #3F51B5;
 
 .mdl-button--accent.mdl-button--accent.mdl-button--raised:hover, .mdl-button--accent.mdl-button--accent.mdl-button--fab:hover {
   background-color: lighten(#00CFAD, 2%);
+}
+
+.mdl-layout__header-row{
+  padding: 0px 40px 0px 40px;
+}
+
+.mdl-layout__header-row .logo{
+  height: 37px;
+  width: auto;
+  display: block;
 }
 
 .devise_error{

@@ -11,7 +11,7 @@
   #problemas_relatados.mdl-tabs__panel.is-active
 
     div class="mdl-grid"
-      - @issue_reports_resolvido.each do |issue_report|
+      - @issue_reports_not_resolvido.each do |issue_report|
         = link_to issue_report, :class => "card_link"
           .info-card-wide.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col
             - if (issue_report.image.url != '/images/original/missing.png')
@@ -47,7 +47,7 @@
 
   #problemas_resolvidos.mdl-tabs__panel
     div class="mdl-grid"
-      - @issue_reports_not_resolvido.each do |issue_report|
+      - @issue_reports_resolvido.each do |issue_report|
         = link_to issue_report, :class => "card_link"
           .info-card-wide.mdl-card.mdl-shadow--2dp.mdl-cell.mdl-cell--4-col
             - if (issue_report.image.url != '/images/original/missing.png')

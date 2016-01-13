@@ -5,8 +5,8 @@ class IssueReportsController < ApplicationController
   # GET /issue_reports
   # GET /issue_reports.json
   def index
-    @issue_reports_resolvido = IssueReport.all.order(:created_at)
-    @issue_reports_not_resolvido = IssueReport.joins(:resolution_report)
+    @issue_reports_not_resolvido = IssueReport.joins('LEFT JOIN resolution_reports ON resolution_reports.issue_report_id = issue_reports.id').where('resolution_reports.issue_report_id IS null').order('issue_reports.created_at DESC')
+    @issue_reports_resolvido = IssueReport.joins(:resolution_report).order('resolution_reports.created_at DESC')
   end
 
   # GET /issue_reports/1

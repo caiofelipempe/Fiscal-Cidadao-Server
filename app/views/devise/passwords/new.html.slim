@@ -4,8 +4,9 @@ div class="login"
       main.mdl-layout__content
         .mdl-card.mdl-shadow--8dp
           .mdl-card__title.mdl-color--primary.mdl-color-text--white
-            h1.mdl-card__title-text Esqueci minha senha
+            = image_tag("logo.svg", :class => "logo-login")
           .mdl-card__supporting-text
+            h1.text-center.mdl-card__title-text Alterar senha
             = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
               .mdl-textfield.mdl-js-textfield
                 = f.label :email, "E-mail", :class => "mdl-textfield__label"

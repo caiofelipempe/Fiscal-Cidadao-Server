@@ -4,7 +4,7 @@ div class="login"
       main.mdl-layout__content
         .mdl-card.mdl-shadow--8dp
           .mdl-card__title.mdl-color--primary.mdl-color-text--white
-            h1.mdl-card__title-text Login
+            = image_tag("logo-login.svg", :class => "logo-login")
           .mdl-card__supporting-text
             = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
               .mdl-textfield.mdl-js-textfield
