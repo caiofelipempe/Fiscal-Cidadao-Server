@@ -16,10 +16,10 @@ class ResolutionReportController < ApplicationController
 
     respond_to do |format|
       if @resolution_report.save
-        format.html { redirect_to @issue_report, notice: 'Resolution_report was successfully created.' }
+        format.html { redirect_to @issue_report, notice: 'Resposta registrada' }
         format.json { render :show, status: :created, location: @issue_report }
       else
-        format.html { render :new }
+        format.html { redirect_to @issue_report }
         format.json { render json: @resolution_report.errors, status: :unprocessable_entity }
       end
     end

@@ -32,7 +32,7 @@ $primary_color: #3F51B5;
 }
 
 .mdl-layout__header-row .logo{
-  height: 37px;
+  height: 34px;
   width: auto;
   display: block;
 }
@@ -402,4 +402,51 @@ a.card_link{
 /* animate out */
 .my-mfp-slide-bottom.mfp-removing.mfp-bg {
   opacity: 0;
+}
+
+
+.pagination {
+  font-size: 15px;
+  float: right;
+  margin: 0;
+  padding: 3px 0 4px;
+}
+.pagination a,
+.pagination span {
+  padding: 3px 3px 2px;
+}
+.pagination .disabled {
+  background:none repeat scroll 0 0 transparent;
+  border:medium none;
+  color:#999999;
+  cursor:default;
+}
+.pagination a {
+  color:#3B5998;
+  cursor:pointer;
+  text-decoration:none;
+}
+.pagination a:hover {
+  color: lighter(#3B5998, 10%);
+  text-decoration:none;
+}
+.pagination .current {}
+.pagination .current {
+  border-bottom:2px solid #3B5998;
+  color:#3B5998;
+  font-weight:bold;
+  padding-left:2px;
+  padding-right:2px;
+  font-style: normal;
+}
+.pagination .current a:hover {
+  background-color:#3B5998;
+  color:#FFFFFF;
+}
+
+.pagination .prev_page {
+
+}
+.pagination .next_page {
+
 }
