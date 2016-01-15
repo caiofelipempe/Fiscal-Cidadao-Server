@@ -3,23 +3,15 @@
     span.ca.ca-issue
     '  Problemas reportados
 
-.mdl-tabs.mdl-js-tabs.mdl-js-ripple-effect
+.mdl-tabs
   .mdl-tabs__tab-bar
-    a.mdl-tabs__tab.is-active href="#problemas_relatados" style="width: 50%;"  Problemas relatados
-    a.mdl-tabs__tab href="#problemas_resolvidos" style="width: 50%;" Problemas resolvidos
+    = link_to 'Problemas reportados', issue_reports_path, :class => "mdl-tabs__tab is-active", :style => "width: 50%"
+    = link_to 'Problemas resolvidos', issue_reports_resolvidos_path, :class => "mdl-tabs__tab", :style => "width: 50%"
 
-  #problemas_relatados.mdl-tabs__panel.is-active
+  .mdl-tabs__panel.is-active
     div class="mdl-grid"
       = render @issue_not_resolvido
 
     .mdl-grid
       .mdl-cell.mdl-cell--12-col
         = will_paginate @issue_not_resolvido, :previous_label => ' Anterior', :next_label => ' Pŕoximo'
-
-  #problemas_resolvidos.mdl-tabs__panel
-    div class="mdl-grid"
-      = render @issue_resolvido
-
-    .mdl-grid
-      .mdl-cell.mdl-cell--12-col
-        = will_paginate @issue_resolvido, :previous_label => ' Anterior', :next_label => ' Pŕoximo'

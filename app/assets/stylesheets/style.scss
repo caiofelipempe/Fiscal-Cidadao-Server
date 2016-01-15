@@ -1,14 +1,16 @@
 $primary_color: #3F51B5;
-
-.logo-login{
-  height: 140px;
-  width: auto;
-  margin: 0 auto;
-  display: block;
-}
+$primary_color_light: #5567CB;
 
 .text-center{
   text-align: center;
+}
+
+.btn-padding{
+  padding: 5px;
+}
+
+#map{
+  height: 300px;
 }
 
 .mdl-button--fab.mdl-button--colored{
@@ -35,6 +37,11 @@ $primary_color: #3F51B5;
   height: 34px;
   width: auto;
   display: block;
+}
+
+.mdl-tabs__tab.is-active{
+  border-bottom: 3px solid $primary_color !important;
+  color: $primary_color !important;
 }
 
 .devise_error{
@@ -70,6 +77,13 @@ html, body{
   padding: 0px;
 }
 
+.logo-login{
+  height: 140px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
 .login .mdl-layout {
   align-items: center;
   justify-content: center;
@@ -78,18 +92,6 @@ html, body{
 .login .mdl-layout__content {
   padding: 24px;
   flex: none;
-}
-
-.text-center{
-  text-align: center !important;
-}
-
-.btn-padding{
-  padding: 5px;
-}
-
-#map{
-  height: 300px;
 }
 
 .login:before{
@@ -131,7 +133,7 @@ html, body{
 }
 
 .title-subheader{
-  background-color: #5567CB;
+  background-color: $primary_color_light;
   padding: 40px 15px 25px;
   color: #FFF;
   margin: -20px 0px 0px 0px;
@@ -163,7 +165,28 @@ a .mdl-card{
   height: auto;
 }
 
-// Icones
+.details-card-image .mdl-card__actions a{
+  color: #FFF;
+  padding: 4px;
+}
+.details-card-image{
+  width: 256px;
+  height: 256px;
+  background: center / cover;
+}
+
+a.card_link{
+  text-decoration: none;
+}
+
+.btn-table-fix{
+  margin-top: -6px;
+}
+
+
+/*
+************** ICONES ****************
+*/
 @font-face {
   font-family: 'ca';
   src:image-url('fonts/ca.eot?wlg5nn');
@@ -228,30 +251,64 @@ a .mdl-card{
 }
 
 
-.details-card-image .mdl-card__actions a{
-  color: #FFF;
-  padding: 4px;
+
+/*
+************** PAGINAÇÃO ****************
+*/
+.pagination {
+  font-size: 15px;
+  float: right;
+  margin: 0;
+  padding: 3px 0 4px;
 }
-.details-card-image{
-  width: 256px;
-  height: 256px;
-  background: center / cover;
+.pagination a,
+.pagination span {
+  padding: 3px 3px 2px;
+}
+.pagination .disabled {
+  background:none repeat scroll 0 0 transparent;
+  border:medium none;
+  color:#999999;
+  cursor:default;
+}
+.pagination a {
+  color:#3B5998;
+  cursor:pointer;
+  text-decoration:none;
+}
+.pagination a:hover {
+  color: lighter(#3B5998, 10%);
+  text-decoration:none;
+}
+.pagination .current {}
+.pagination .current {
+  border-bottom:2px solid #3B5998;
+  color:#3B5998;
+  font-weight:bold;
+  padding-left:2px;
+  padding-right:2px;
+  font-style: normal;
+}
+.pagination .current a:hover {
+  background-color:#3B5998;
+  color:#FFFFFF;
 }
 
-a.card_link{
-  text-decoration: none;
+.pagination .prev_page {
+
+}
+.pagination .next_page {
+
 }
 
-.btn-table-fix{
-  margin-top: -6px;
-}
 
-
+/*
+************** MODAL ****************
+*/
 .mfp-with-zoom .mfp-container,
 .mfp-with-zoom.mfp-bg {
   opacity: 0;
   -webkit-backface-visibility: hidden;
-  /* ideally, transition speed should match zoom duration */
   -webkit-transition: all 0.3s ease-out;
   -moz-transition: all 0.3s ease-out;
   -o-transition: all 0.3s ease-out;
@@ -270,8 +327,6 @@ a.card_link{
   opacity: 0;
 }
 
-
-/* Styles for dialog window */
 .small-dialog {
   background: white;
   padding: 20px 30px;
@@ -281,12 +336,6 @@ a.card_link{
   position: relative;
 }
 
-
-/**
- * Fade-zoom animation for first dialog
- */
-
-/* start state */
 .my-mfp-zoom-in .zoom-anim-dialog {
   opacity: 0;
 
@@ -402,51 +451,4 @@ a.card_link{
 /* animate out */
 .my-mfp-slide-bottom.mfp-removing.mfp-bg {
   opacity: 0;
-}
-
-
-.pagination {
-  font-size: 15px;
-  float: right;
-  margin: 0;
-  padding: 3px 0 4px;
-}
-.pagination a,
-.pagination span {
-  padding: 3px 3px 2px;
-}
-.pagination .disabled {
-  background:none repeat scroll 0 0 transparent;
-  border:medium none;
-  color:#999999;
-  cursor:default;
-}
-.pagination a {
-  color:#3B5998;
-  cursor:pointer;
-  text-decoration:none;
-}
-.pagination a:hover {
-  color: lighter(#3B5998, 10%);
-  text-decoration:none;
-}
-.pagination .current {}
-.pagination .current {
-  border-bottom:2px solid #3B5998;
-  color:#3B5998;
-  font-weight:bold;
-  padding-left:2px;
-  padding-right:2px;
-  font-style: normal;
-}
-.pagination .current a:hover {
-  background-color:#3B5998;
-  color:#FFFFFF;
-}
-
-.pagination .prev_page {
-
-}
-.pagination .next_page {
-
 }

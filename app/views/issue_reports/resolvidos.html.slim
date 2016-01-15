@@ -1,0 +1,17 @@
+.title-subheader
+  h2.display-1
+    span.ca.ca-issue
+    '  Problemas resolvidos
+
+.mdl-tabs
+  .mdl-tabs__tab-bar
+    = link_to 'Problemas reportados', issue_reports_path, :class => "mdl-tabs__tab", :style => "width: 50%"
+    = link_to 'Problemas resolvidos', issue_reports_resolvidos_path, :class => "mdl-tabs__tab is-active", :style => "width: 50%"
+
+  .mdl-tabs__panel.is-active
+    div class="mdl-grid"
+      = render @issue_resolvido
+
+    .mdl-grid
+      .mdl-cell.mdl-cell--12-col
+        = will_paginate @issue_resolvido, :previous_label => ' Anterior', :next_label => ' Pŕoximo'

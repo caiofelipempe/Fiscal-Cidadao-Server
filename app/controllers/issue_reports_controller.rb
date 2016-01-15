@@ -10,7 +10,9 @@ class IssueReportsController < ApplicationController
       .where('resolution_reports.issue_report_id IS null')
       .paginate(:page => params[:page], :per_page => 9)
       .order('issue_reports.created_at DESC')
+  end
 
+  def resolvidos
     @issue_resolvido = IssueReport.joins(:resolution_report)
       .paginate(:page => params[:page], :per_page => 9)
       .order('resolution_reports.created_at DESC')
