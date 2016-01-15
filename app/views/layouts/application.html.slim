@@ -17,7 +17,8 @@ html lang="pt-br"
         header.mdl-layout__header
           .mdl-layout__header-row
             span.mdl-layout-title
-              = image_tag("logo.svg", :class => "logo")
+              = link_to issue_reports_path do 
+                = image_tag("logo.svg", :class => "logo")
             .mdl-layout-spacer
             nav.mdl-navigation
               = link_to issue_reports_path, :class => "mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" do
