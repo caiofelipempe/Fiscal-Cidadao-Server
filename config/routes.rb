@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "issue_reports#index", :path => 'problemas'
+  root to: "issue_reports#index"
 
   resources :issues, :path => 'categorias'
   get "/problemas_resolvidos", to: 'issue_reports#resolvidos', as: :issue_reports_resolvidos
