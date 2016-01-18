@@ -9,7 +9,7 @@
 
   p
     b Enviado por:
-    '  
+    '
     = @issue_report.user.login
 
 
@@ -18,20 +18,21 @@
   div.mdl-shadow--2dp.mdl-cell.mdl-cell--12-col
     .mdl-grid
       .mdl-cell.mdl-cell--12-col
-        - if (@issue_report.image.url != '/images/original/missing.png')
-          .details-card-image.mdl-card.media-style style="background-image: url(#{image_url(@issue_report.image.url(:thumb))});"
-            .mdl-card__actions.mdl-card--border
-              a href="#{image_url(@issue_report.image.url(:original))}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
-                span.ca.ca-expand
-        - else
-          .details-card-image.mdl-card.media-style style="background-image: url(#{image_url('missing.jpg')});"
-            .mdl-card__actions.mdl-card--border
-              a href="#{image_url('missing.jpg')}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
-               span.ca.ca-expand
+        - if !(@issue_report.video?)
+          - if (@issue_report.image.url != '/images/original/missing.png')
+            .details-card-image.mdl-card.media-style style="background-image: url(#{image_url(@issue_report.image.url(:thumb))});"
+              .mdl-card__actions.mdl-card--border
+                a href="#{image_url(@issue_report.image.url(:original))}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
+                  span.ca.ca-expand
+          - else
+            .details-card-image.mdl-card.media-style style="background-image: url(#{image_url('missing.jpg')});"
+              .mdl-card__actions.mdl-card--border
+                a href="#{image_url('missing.jpg')}"  title="#{(@issue_report.issue_id != nil)? Issue.find(@issue_report.issue_id).name : 'Outro' } em #{@issue_report.address}" class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect test-popup-link"
+                 span.ca.ca-expand
 
         - if @issue_report.video?
           .media-style
-            = video_tag @issue_report.video, :size => "320x240", :controls => true, :poster => ""
+            = video_tag @issue_report.video.url, :size => "320x240", :controls => true, :poster => @issue_report.image.url(:original)
 
         p = @issue_report.description
 
