@@ -125,6 +125,15 @@ module API
             issue_report.image = image
           end
 
+          encoded_video = params[:video]
+          if encoded_video
+            content_type = "video/quicktime"
+            filename =  issue_report.id.to_s + "issue_report_video.mov"
+            video = Paperclip.io_adapters.for("data:#{content_type};base64,#{encoded_video}")
+            video.original_filename = filename
+            issue_report.video = video
+          end
+
           if issue_report.save
             {
               status: 'success'

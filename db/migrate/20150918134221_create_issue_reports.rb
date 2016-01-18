@@ -8,6 +8,7 @@ class CreateIssueReports < ActiveRecord::Migration
       t.string :address
       t.string :description
       t.attachment :image
+      t.attachment :video
 
       t.timestamps null: false
     end
