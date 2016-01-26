@@ -35,6 +35,10 @@ ActiveRecord::Schema.define(version: 20150921142253) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.string   "video_file_name"
+    t.string   "video_content_type"
+    t.integer  "video_file_size"
+    t.datetime "video_updated_at"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
